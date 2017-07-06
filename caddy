@@ -8,7 +8,8 @@
 caddyname="Caddy Web Server"
 caddypath="/opt/caddyserver"
 caddyuser="caddy"
-caddyfile="/etc/caddy/Caddyfile"
+caddyetc="/etc/caddy/"
+caddyfile="$caddyetc/Caddyfile"
 caddywww="/var/caddywww"
 caddylog="/var/log/caddy"
 cwsiv="v4.8 (29 Jun 2017)"
@@ -205,6 +206,7 @@ installcaddy () {
 	# Creating folders
 	echo ""
 	mkdir -p $caddypath
+	mkdir -p $caddyetc
 	mkdir -p $caddylog
 	
 	# Extract Caddy on created folder
@@ -218,6 +220,7 @@ installcaddy () {
 	# Creating non-root user
 	useradd -r -d $caddypath -s /bin/false $caddyuser
 	chown $caddyuser $caddypath
+	chown $caddyuser $caddyetc
 	chown $caddyuser $caddylog
 
 	# Port setup
