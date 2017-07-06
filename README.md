@@ -1,4 +1,4 @@
-# Caddy-Web-Server-Installer
+# Canddy Web Server Installer
 
 
 Download **caddy.sh** and run **bash caddy.sh**<br>
@@ -44,11 +44,7 @@ Once done, you can use below command:
 
 > *caddy version*        - Check Script/Caddy/PHP5-fpm version info </hr>
 
-### Contribute?
+### Creds
 
-Contributions are always welcome - if you have any code to contribute, simply fork this and submit a pull request! Otherwise, if you find any bugs or issues, please open an issue!
+* [Sayem Chowdhury](https://github.com/sayem314)
 
-### Donations
-
-If you want to show your appreciation, you can donate via Bitcoin. Thanks!</br>
-<code>1GN7M2W4eAXTLDCeskwsgqJB9gFA3gLqPB</code>
