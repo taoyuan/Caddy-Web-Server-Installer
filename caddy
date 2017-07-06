@@ -49,7 +49,7 @@ prms () {
 }
 
 startcaddy () {
-	pids=`ps aux | grep $caddypath/caddy | grep -v grep | awk '{ print $2 }'`
+	pids=`ps aux | grep $caddypath/caddy | grep -v "grep\|root" | awk '{ print $2 }'`
 	caddypid="/var/run/caddy"
 	if [[ ! -f $caddypid ]]; then
 		mkdir -p $caddypid
@@ -64,7 +64,7 @@ startcaddy () {
 		fi
 		sleep 1
 		echo "  [$(tput setaf 2)DONE$(tput sgr0)]"
-		pids=`ps aux | grep $caddypath/caddy | grep -v grep | awk '{ print $2 }'`
+		pids=`ps aux | grep $caddypath/caddy | grep -v "grep\|root" | awk '{ print $2 }'`
 		sleep 1
 		restartphpfpm;
 		caddystatus;
@@ -76,7 +76,7 @@ startcaddy () {
 }
 
 stopcaddy () {
-	pids=`ps aux | grep $caddypath/caddy | grep -v grep | awk '{ print $2 }'`
+	pids=`ps aux | grep $caddypath/caddy | grep -v "grep\|root" | awk '{ print $2 }'`
 	if [ -z "$pids" ] ; then
 		echo ""
 		echo "  $caddyname is $(tput setaf 1)NOT running$(tput sgr0)"
@@ -98,7 +98,7 @@ stopcaddy () {
 }
 
 reloadcaddy () {
-	pids=`ps aux | grep $caddypath/caddy | grep -v grep | awk '{ print $2 }'`
+	pids=`ps aux | grep $caddypath/caddy | grep -v "grep\|root" | awk '{ print $2 }'`
 	if [ -z "$pids" ] ; then
 		echo ""
 		echo "  $caddyname is $(tput setaf 1)NOT running$(tput sgr0)"
@@ -129,7 +129,7 @@ caddystatus () {
 	echo ""
 	exit
 	fi
-	pids=`ps aux | grep $caddypath/caddy | grep -v grep | awk '{ print $2 }'`
+	pids=`ps aux | grep $caddypath/caddy | grep -v "grep\|root" | awk '{ print $2 }'`
 	# Detect Caddy process
 	if [ -z "$pids" ] ; then
 		echo ""
