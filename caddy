@@ -20,7 +20,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \             Caddy Web Server Installer                / "
 	echo "  \                  $cwsiv                   / "
-	echo "  \             Modified by Yuan Tao		                / "
+	echo "  \             Modified by Yuan Tao                      / "
 	echo "  \             Created by Sayem Chowdhury                / "
 	echo "  \             Caddy Web: Caddyserver.com                / "
 	echo "  ========================================================= "
