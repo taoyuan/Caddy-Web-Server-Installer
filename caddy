@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Caddy Web Server Installer
-# https://github.com/sayem314/Caddy-Web-Server-Installer
+# https://github.com/taoyuan/caddy-installer
 #
 
 # Global config
@@ -20,6 +20,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \             Caddy Web Server Installer                / "
 	echo "  \                  $cwsiv                   / "
+	echo "  \             Modified by Yuan Tao		                / "
 	echo "  \             Created by Sayem Chowdhury                / "
 	echo "  \             Caddy Web: Caddyserver.com                / "
 	echo "  ========================================================= "
