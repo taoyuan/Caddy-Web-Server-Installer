@@ -8,7 +8,7 @@
 caddyname="Caddy Web Server"
 caddypath="/opt/caddyserver"
 caddyuser="caddy"
-caddyetc="/etc/caddy/"
+caddyetc="/etc/caddy"
 caddyfile="$caddyetc/Caddyfile"
 caddywww="/var/caddywww"
 caddylog="/var/log/caddy"
