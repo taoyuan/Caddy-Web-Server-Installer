@@ -581,10 +581,9 @@ deletecaddy () {
 			fi
 			rm -rf $caddypath &>/dev/null # deleting caddy web server folder
 			rm $caddyfile &>/dev/null # deleting caddyfile
-			deletecaddydata;
-			userdel $caddyuser # delete caddy user
-			echo "  Caddy has been deleted"
+			echo "  $caddyname has been deleted."
 			echo ""
+			deletecaddydata;
 			exit
 			;;
 			[nN][oO]|[nN]) exit;;
