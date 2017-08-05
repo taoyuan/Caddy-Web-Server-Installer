@@ -501,7 +501,13 @@ if [[ -e /etc/systemd/system/caddy.service || -e /etc/init.d/caddy.sh ]]; then
 	echo "  Service already exists! Skipped."
 else
 	nocert="--no-check-certificate"
-	init=`cat /proc/1/comm`
+	# init=`cat /proc/1/comm`
+	if hash systemctl 2>/dev/null; then
+		init='systemd'
+    	else
+       		init='init'
+    	fi
+	
 	echo -n "  Creating service..."
 	if [ "$init" == 'systemd' ]; then
 		MAIN="$"
@@ -559,7 +565,12 @@ deletecaddy () {
 			[yY][eE][sS]|[yY])
 			stopcaddy;
 			killall caddy &>/dev/null
-			init=`cat /proc/1/comm`
+			# init=`cat /proc/1/comm`
+			if hash systemctl 2>/dev/null; then
+				init='systemd'
+			else
+				init='init'
+			fi
 			if [ "$init" == 'init' ]; then
 				update-rc.d -f caddy.sh remove
 				rm -f /etc/init/caddy.conf &>/dev/null
