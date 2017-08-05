@@ -58,7 +58,9 @@ startcaddy () {
 	fi
 	if [ -z "$pids" ] ; then
 		echo -n "  Starting $caddyname..."
-		if [[ -e /etc/init/caddy.conf || -e /etc/systemd/system/caddy.service ]]; then
+		if [ -e /etc/systemd/system/caddy.service ]; then
+			systemctl start caddy
+		elif [ -e /etc/init/caddy.conf ]; then
 			service caddy start
 		else
 			sudo -H -u $caddyuser $caddypath/caddy -conf="$caddyfile" -quiet=true -pidfile=/var/run/caddy/caddy.pid &
