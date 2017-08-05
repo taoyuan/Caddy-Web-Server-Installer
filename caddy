@@ -191,38 +191,50 @@ installcaddy () {
 		cpubits="arm7"
 		cpubitsname="(ARM 7)..."
 	else
-		echo ""
-		echo "  unsupported or unknown architecture"
-		echo ""
-		exit;
+		echo; echo "  unsupported or unknown architecture";
+		echo; exit;
 	fi
 
+	# Download Caddy binary, caddy is protable.
 	nocert="--no-check-certificate"
-
-	# Installing Caddy
-	echo -n "  Downloading $caddyname for $cpubitsname" #Caddy linux
-	wget -q $nocert "https://caddyserver.com/download/linux/$cpubits" -O "caddy_linux_custom.tar.gz"
+	echo -n "  Downloading $caddyname for $cpubitsname" # Caddy linux
+	if ! wget -q $nocert "https://caddyserver.com/download/linux/$cpubits" -O "caddy_linux_custom.tar.gz"; then
+		echo "  [$(tput setaf 1)FAILED$(tput sgr0)]"
+		echo ""
+		echo "  Error: Cannot download Caddy binary!"
+		echo "  https://caddyserver.com/download/linux/$cpubits"
+		exit 1
+	fi
 	echo "  [$(tput setaf 2)DONE$(tput sgr0)]"
 
 	# Creating folders
 	echo ""
 	mkdir -p $caddypath
-	mkdir -p $caddyetc
 	mkdir -p $caddylog
 	
-	# Extract Caddy on created folder
+	# Extract Caddy to appropriate folder
 	echo -n "  Extracting $caddyname to $caddypath..."
-	tar xzf caddy_linux_custom.tar.gz -C $caddypath #Extracting Caddy
+	if ! tar xzf caddy_linux_custom.tar.gz -C $caddypath; then
+		echo "  [$(tput setaf 1)FAILED$(tput sgr0)]"
+		echo ""
+		echo "  Error: Cannot extract 'caddy_linux_custom.tar.gz'"
+		echo "  Abort."
+		exit 1
+	fi
 	echo " $(tput setaf 2)[DONE]$(tput sgr0)"
-	rm -rf caddy_linux_custom.tar.gz #Deleting Caddy archive
+	rm -f caddy_linux_custom.tar.gz # Deleting Caddy archive
 	echo ""
 	installphp;
 
 	# Creating non-root user
-	useradd -r -d $caddypath -s /bin/false $caddyuser
-	chown $caddyuser $caddypath
-	chown $caddyuser $caddyetc
-	chown $caddyuser $caddylog
+	if id -u $caddyuser >/dev/null 2>&1; then
+		echo "  User '$caddyuser' already exists! Skipped."
+	else
+		echo "  Creating user '$caddyuser'"
+		useradd -r -d $caddypath -s /bin/false $caddyuser
+    	fi
+	chown -R $caddyuser $caddypath
+	chown -R $caddyuser $caddylog
 
 	# Port setup
 	APT_GET_CMD="/usr/bin/apt-get"
