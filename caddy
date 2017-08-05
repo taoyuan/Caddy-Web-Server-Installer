@@ -564,7 +564,8 @@ deletecaddy () {
 		case $option in
 			[yY][eE][sS]|[yY])
 			stopcaddy;
-			killall caddy &>/dev/null
+			sleep 0.5
+			sleep 3
 			# init=`cat /proc/1/comm`
 			if hash systemctl 2>/dev/null; then
 				init='systemd'
